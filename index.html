@@ -4,59 +4,85 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Calculate Me</title>
-        <link rel="stylesheet" href="style.css" />
         <link
             rel="stylesheet"
-            href="https://use.fontawesome.com/f63ccf7aa7.css"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         />
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-        <script src="svg-injector.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <div>
+        <div class="container">
+            <div class="row top-space"></div>
             <div class="row">
-                <div class="display">
-                    <span id="results"></span>
+                <div class="col-6 description">
+                    <h1>Calculator</h1>
+                    <p>
+                        This calculator project is based on the prompt from
+                        <a
+                            href="https://www.theodinproject.com/courses/web-development-101/lessons/calculator"
+                            >The Odin Project Web Development 101</a
+                        >
+                        course. It is a basic calculator that can be operated by
+                        clicking the buttons, or by typing on your keyboard. It
+                        understand relevant order of operations, allows you to
+                        clear the memory entirely (AC) or simply backspace to
+                        delete a mistyped number.
+                    </p>
+                    <p>This project was a good opportunity to expore:</p>
+                    <ul>
+                        <li>Basic Bootstrap grid layouts</li>
+                        <li>Object arrays to organize data</li>
+                        <li>Event Listeners</li>
+                        <li>Binding functions</li>
+                        <li>Applying classes with javascript</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="row">
-                <div class="keys light" id="clear">AC</div>
-                <div class="keys light" id="backspace">
-                    <img src="svg/backspace.svg" class="svg light" />
-                </div>
-                <div class="keys yellow" id="divide">
-                    <span>÷</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="keys dark left" id="seven">7</div>
-                <div class="keys dark" id="eight">8</div>
-                <div class="keys dark right" id="nine">9</div>
-                <div class="keys yellow" id="multiply">
-                    <span>x</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="keys dark left" id="four">4</div>
-                <div class="keys dark" id="five">5</div>
-                <div class="keys dark right" id="six">6</div>
-                <div class="keys yellow" id="subtract">
-                    <span>-</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="keys dark left" id="one">1</div>
-                <div class="keys dark" id="two">2</div>
-                <div class="keys dark right" id="three">3</div>
-                <div class="keys yellow" id="add">
-                    <span>+</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="keys dark left" id="zero">0</div>
-                <div class="keys dark right" id="decimal">.</div>
-                <div class="keys yellow" id="equal">
-                    <span>=</span>
+                <div class="col-md-auto">
+                    <div class="row">
+                        <div class="display">
+                            <span id="results">0</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="keys light" id="clear">AC</div>
+                        <div class="keys light" id="backspace">
+                            <img src="svg/backspace.svg" class="svg light" />
+                        </div>
+                        <div class="keys yellow" id="divide">
+                            <span>÷</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="keys dark left" id="seven">7</div>
+                        <div class="keys dark" id="eight">8</div>
+                        <div class="keys dark right" id="nine">9</div>
+                        <div class="keys yellow" id="multiply">
+                            <span>x</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="keys dark left" id="four">4</div>
+                        <div class="keys dark" id="five">5</div>
+                        <div class="keys dark right" id="six">6</div>
+                        <div class="keys yellow" id="subtract">
+                            <span>-</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="keys dark left" id="one">1</div>
+                        <div class="keys dark" id="two">2</div>
+                        <div class="keys dark right" id="three">3</div>
+                        <div class="keys yellow" id="add">
+                            <span>+</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="keys dark left" id="zero">0</div>
+                        <div class="keys dark right" id="decimal">.</div>
+                        <div class="keys red" id="equal">
+                            <span>=</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

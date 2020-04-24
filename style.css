@@ -2,9 +2,16 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
         "Segoe UI Emoji", "Segoe UI Symbol";
-    background-color: #525252;
+    background-color: #757575;
+}
+a {
+    color: #cfcfcf;
+}
+a:hover {
+    color: whitesmoke;
 }
 .keys {
+    transition: filter .1s ease;
     display: block;
     margin: 0.15rem;
     width: 3rem;
@@ -14,25 +21,23 @@ body {
     box-shadow: 0.1rem 0.1rem 0.1rem 0rem #000000,
         inset 0.1rem 0.1rem 0.1rem 0rem #ffffff38;
 }
+
 .keys:hover {
     cursor: pointer;
 }
-.keys:active{
-    filter: brightness(70%);
+.highlight{
+    filter: brightness(50%);
 }
 .display:hover {
     cursor: default;
 }
 .svg {
-    margin: 0.7rem auto;
+    margin: .9rem auto;
     display: block;
-    height: 2rem;
-    width: 2rem;
+    height: 1.5rem;
+    width: 1.5rem;
     line-height: 3rem;
 }
-span {
-}
-
 .left {
     border-radius: 1.5rem 0.2rem 0.2rem 1.5rem;
 }
@@ -45,7 +50,7 @@ span {
 }
 .dark {
     background-color: #383838;
-    color: white;
+    color: #cfcfcf;
 }
 .light {
     background-color: #aaaaaa;
@@ -59,8 +64,19 @@ span {
     font-size: 2rem;
     line-height: 2.7rem;
 }
+.red {
+    background-color: #d3521f;
+    color: #000;
+    border-radius: 1.5rem;
+    font-size: 2rem;
+    line-height: 2.7rem;
+}
+.top-space {
+    height: 10rem;
+}
+
 .display {
-    margin: 10rem 1rem 0.5rem 1rem;
+    margin: 1rem 1rem 0.5rem 1rem;
     background-color: #bbf7ff;
     text-align: right;
     display: block;
@@ -73,11 +89,9 @@ span {
     font-size: 1.5rem;
 }
 #results {
-    padding-right: 0.5rem;
+    padding-right: 1rem;
 }
-a {
-    line-height: 40px;
-}
+
 #zero,
 #clear {
     width: 6.2rem;
