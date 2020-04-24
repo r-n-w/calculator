@@ -1,10 +1,3 @@
-// Add a real divide symbol
-// Add a backspace icon
-// make arrow be a finger when you mousover
-// figure out the plus/minus
-// give feadback when buttons are pressed.
-
-
 const add = (a, b) => a + b;
 const subract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
@@ -53,7 +46,6 @@ let secondValue;
 numbers.forEach(number => {
     number.id.addEventListener('click', numberFunction.bind(this,number.value));
 });
-
 operators.forEach(operator => {
     operator.id.addEventListener('click', operatorFunction.bind(this,operator.value));
 })
@@ -122,15 +114,3 @@ window.addEventListener('keydown', (e) => {
     }
     console.log(e);  
 });
-// window.addEventListener('keydown', (e) => {
-//     if (!isNaN(e.key) || e.key == '.') {
-//         numberFunction(e.key);
-//         console.log(e.key);  
-//     }
-// })
-// window.addEventListener('kedown')
-
-
-let symbol = 'division';
-
-console.log(operate(2,5,symbol));
