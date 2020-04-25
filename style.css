@@ -71,12 +71,15 @@ a:hover {
     font-size: 2rem;
     line-height: 2.7rem;
 }
-.top-space {
-    height: 10rem;
+@media (min-width: 576px) {
+    .top-space {
+        height: 10rem;
+    }
 }
 
+
 .display {
-    margin: 1rem 1rem 0.5rem 1rem;
+    margin: .5rem;
     background-color: #bbf7ff;
     text-align: right;
     display: block;
