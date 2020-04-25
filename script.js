@@ -1,5 +1,4 @@
 // make better order of operations
-// footer.
 
 const add = (a, b) => a + b;
 const subract = (a, b) => a - b;
