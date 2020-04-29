@@ -42,12 +42,7 @@ const backspace = document.querySelector('#backspace');
 const equal = document.querySelector('#equal');
 
 
-let op;
-let a = 0;
-let b = 0;
-let c;
-let previousOperator = 'addition';
-let prePreviousOperator = 'addition';
+let a,b,c,previousOperator,prePreviousOperator = null;
 let operated = false;
 // Functions defining what happens when each button is clicked.
 function numberFunction(num) {
@@ -62,15 +57,28 @@ function numberFunction(num) {
 }
 function operatorFunction(operator) {
     // 3/4 times:
-    
-    c = parseFloat(results.innerHTML);
-    a = b = results.innerHTML = calculate(b,c,previousOperator);
+    if (
+        (operator.value == 'multiplication' || operator.value == 'division') &&
+        (previousOperator == 'addition' || previousOperator == 'subtraction')
+        ) {
+        c = parseFloat(results.innerHTML);
+        a = b = results.innerHTML = calculate(b,c,previousOperator);
+        prePreviousOperator = previousOperator;
+        previousOperator = operator.value;
+    }
 
     // 1/4 times if op = */ and pre = +- then:
 
-    c = parseFloat(results.innerHTML);
+    b = parseFloat(results.innerHTML);
     a = a
-    
+    c = null
+    operated =  false
+    prePreviousOperator = previousOperator;
+    previousOperator = operator.value;
+
+
+
+
 
     if (operator.value == 'multiplication' || operator.value == 'division') {
         if (previousOperator == 'addition' || previousOperator == 'subtraction') {
@@ -118,8 +126,7 @@ function equalFunction() {
     console.log(b);
     console.log(currentOperator);
     results.innerHTML = calculate(a, b, currentOperator);
-    a = 0;
-    previousOperator = 'addition'
+    a,b,c,previousOperator,prePreviousOperator = null;
     brightnessFlicker(equal);
 }
 function backspaceFunction() {
@@ -134,10 +141,8 @@ function backspaceFunction() {
     brightnessFlicker(backspace);
 }
 function clearFunction() {
+    a,b,c,previousOperator,prePreviousOperator = null;
     results.innerHTML = 0;
-    a = 0;
-    b = null;
-    previousOperator = 'addition';
     brightnessFlicker(clear);
 }
 
