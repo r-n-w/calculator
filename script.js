@@ -42,91 +42,69 @@ const backspace = document.querySelector('#backspace');
 const equal = document.querySelector('#equal');
 
 
-let a,b,c,previousOperator,prePreviousOperator = null;
+let a = b = c = previousOperator = prePreviousOperator = null;
 let operated = false;
 // Functions defining what happens when each button is clicked.
 function numberFunction(num) {
-    if (results.innerHTML == 0 || operated == false) {
+    if (results.innerHTML === 0 || operated === false) {
         results.innerHTML = num;
         operated = true;
     } else {
         results.innerHTML = results.innerHTML + num;
     }
-    let activeButton = numbers.find((number) => number.value == num);
+    let activeButton = numbers.find((number) => number.value === num);
     brightnessFlicker(activeButton.id);
 }
 function operatorFunction(operator) {
     // 3/4 times:
-    if (
-        (operator.value == 'multiplication' || operator.value == 'division') &&
-        (previousOperator == 'addition' || previousOperator == 'subtraction')
-        ) {
+    if (previousOperator === null) {
+        a = b = parseFloat(results.innerHTML);
+        previousOperator = operator.value;
+    } else if (
+        (operator.value === 'addition' || operator.value === 'subtraction') &&
+        (previousOperator === 'addition' || previousOperator === 'subtraction')
+    ) {
         c = parseFloat(results.innerHTML);
         a = b = results.innerHTML = calculate(b,c,previousOperator);
+        prePreviousOperator = null;
+        previousOperator = operator.value;
+    } else if (
+        (operator.value === 'multiplication' || operator.value === 'division') &&
+        (previousOperator === 'addition' || previousOperator === 'subtraction')
+    ) {
+        b = parseFloat(results.innerHTML);
+        c = null
         prePreviousOperator = previousOperator;
         previousOperator = operator.value;
+    } else if (
+        (operator.value === 'multiplication' || operator.value === 'division') &&
+        (previousOperator === 'multiplication' || previousOperator === 'division')
+    ) {
+        c = parseFloat(results.innerHTML);
+        b = results.innerHTML = calculate(b,c,previousOperator);
+        previousOperator = operator.value;
+    } else if (
+        (operator.value === 'addition' || operator.value === 'subtraction') &&
+        (previousOperator === 'multiplication' || previousOperator === 'division') 
+    ) {
+        c = parseInt(results.innerHTML);
+        a = b = results.innerHTML = calculate(a,calculate(b,c,previousOperator),prePreviousOperator);
+        previousOperator = operator.value;
+        prePreviousOperator = null;
     }
-
-    // 1/4 times if op = */ and pre = +- then:
-
-    b = parseFloat(results.innerHTML);
-    a = a
-    c = null
-    operated =  false
-    prePreviousOperator = previousOperator;
-    previousOperator = operator.value;
-
-
-
-
-
-    if (operator.value == 'multiplication' || operator.value == 'division') {
-        if (previousOperator == 'addition' || previousOperator == 'subtraction') {
-            b = parseFloat(results.innerHTML);
-        } else if (previousOperator == 'multiplication' || previousOperator == 'division') {
-            c = parseFloat(results.innerHTML);
-            results.innerHTML = calculate(b,c,previousOperator);
-        }
-    }
-    if (previousOperator == 'multiplication' || previousOperator == 'division') {
-        b = 1;
-    }
-    
-    
-    if (operator.value == 'addition' || operator.value == 'subtraction') {
-        results.innerHTML = calculate(b,c,previousoperator)
-        a = results.innerHTML;
-        b = a;
-    }
-
-    prePreviousOperator = previousOperator;
-    previousOperator = operator.value;
-    operator = false;
-
-
-
-
-
-
-    // b = parseFloat(results.innerHTML);
-    // console.log(a);
-    // console.log(b);
-    // console.log(previousOperator);
-    // results.innerHTML = calculate(a,b,previousOperator);
-    // prePreviousOperator = previousOperator;
-    // previousOperator = currentOperator;
-    // currentOperator = operator.value;
-    // a = parseFloat(results.innerHTML);
-    // operated = false;
-    // brightnessFlicker(operator.id);
+    brightnessFlicker(operator.id);
+    operated = false;
 }
 function equalFunction() {
-    b = parseFloat(results.innerHTML);
-    console.log(a);
-    console.log(b);
-    console.log(currentOperator);
-    results.innerHTML = calculate(a, b, currentOperator);
-    a,b,c,previousOperator,prePreviousOperator = null;
+    c = parseFloat(results.innerHTML);
+    if (!previousOperator) {return};
+    if (prePreviousOperator) {
+        results.innerHTML = calculate(a,calculate(b,c,previousOperator),prePreviousOperator);
+    } else {
+        results.innerHTML = calculate(b, c, previousOperator);
+    }
+    a = b = c = previousOperator = prePreviousOperator = null;
+    operated = false;
     brightnessFlicker(equal);
 }
 function backspaceFunction() {
@@ -141,8 +119,9 @@ function backspaceFunction() {
     brightnessFlicker(backspace);
 }
 function clearFunction() {
-    a,b,c,previousOperator,prePreviousOperator = null;
+    a = b = c = previousOperator = prePreviousOperator = null;
     results.innerHTML = 0;
+    operated = false;
     brightnessFlicker(clear);
 }
 
@@ -176,7 +155,7 @@ clear.addEventListener('click', clearFunction);
 
 
 window.addEventListener('keydown', (e) => {
-    if (!isNaN(e.key) || e.key == '.') {
+    if (!isNaN(e.key) || e.key === '.') {
         numberFunction(e.key);
     }
     switch (e.key) {
