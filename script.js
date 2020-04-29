@@ -1,20 +1,20 @@
 // make better order of operations
 
-const add = (a, b) => a + b;
-const subract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+const add = (x, y) => x + y;
+const subract = (x, y) => x - y;
+const multiply = (x, y) => x * y;
+const divide = (x, y) => x / y;
 
-const calculate = (a, b, operator) => {
+const calculate = (x, y, operator) => {
     switch (operator) {
         case 'addition':
-            return add(a, b);
+            return add(x, y);
         case 'subtraction':
-            return subract(a, b);
+            return subract(x, y);
         case 'multiplication':
-            return multiply(a, b);
+            return multiply(x, y);
         case 'division':
-            return divide(a, b);
+            return divide(x, y);
     }
 };
 const numbers = [
@@ -43,10 +43,11 @@ const equal = document.querySelector('#equal');
 
 
 let op;
-let firstValue = 0;
-let secondValue;
-let currentOperator = 'addition';
+let a = 0;
+let b = 0;
+let c;
 let previousOperator = 'addition';
+let prePreviousOperator = 'addition';
 let operated = false;
 // Functions defining what happens when each button is clicked.
 function numberFunction(num) {
@@ -60,24 +61,64 @@ function numberFunction(num) {
     brightnessFlicker(activeButton.id);
 }
 function operatorFunction(operator) {
-    secondValue = parseFloat(results.innerHTML);
-    console.log(firstValue);
-    console.log(secondValue);
-    console.log(previousOperator);
-    results.innerHTML = calculate(firstValue,secondValue,previousOperator);
-    previousOperator = currentOperator;
-    currentOperator = operator.value;
-    firstValue = parseFloat(results.innerHTML);
-    operated = false;
-    brightnessFlicker(operator.id);
+    // 3/4 times:
+    
+    c = parseFloat(results.innerHTML);
+    a = b = results.innerHTML = calculate(b,c,previousOperator);
+
+    // 1/4 times if op = */ and pre = +- then:
+
+    c = parseFloat(results.innerHTML);
+    a = a
+    
+
+    if (operator.value == 'multiplication' || operator.value == 'division') {
+        if (previousOperator == 'addition' || previousOperator == 'subtraction') {
+            b = parseFloat(results.innerHTML);
+        } else if (previousOperator == 'multiplication' || previousOperator == 'division') {
+            c = parseFloat(results.innerHTML);
+            results.innerHTML = calculate(b,c,previousOperator);
+        }
+    }
+    if (previousOperator == 'multiplication' || previousOperator == 'division') {
+        b = 1;
+    }
+    
+    
+    if (operator.value == 'addition' || operator.value == 'subtraction') {
+        results.innerHTML = calculate(b,c,previousoperator)
+        a = results.innerHTML;
+        b = a;
+    }
+
+    prePreviousOperator = previousOperator;
+    previousOperator = operator.value;
+    operator = false;
+
+
+
+
+
+
+    // b = parseFloat(results.innerHTML);
+    // console.log(a);
+    // console.log(b);
+    // console.log(previousOperator);
+    // results.innerHTML = calculate(a,b,previousOperator);
+    // prePreviousOperator = previousOperator;
+    // previousOperator = currentOperator;
+    // currentOperator = operator.value;
+    // a = parseFloat(results.innerHTML);
+    // operated = false;
+    // brightnessFlicker(operator.id);
 }
 function equalFunction() {
-    secondValue = parseFloat(results.innerHTML);
-    console.log(firstValue);
-    console.log(secondValue);
+    b = parseFloat(results.innerHTML);
+    console.log(a);
+    console.log(b);
     console.log(currentOperator);
-    results.innerHTML = calculate(firstValue, secondValue, currentOperator);
-    firstValue = 0;
+    results.innerHTML = calculate(a, b, currentOperator);
+    a = 0;
     previousOperator = 'addition'
     brightnessFlicker(equal);
 }
@@ -94,8 +135,8 @@ function backspaceFunction() {
 }
 function clearFunction() {
     results.innerHTML = 0;
-    firstValue = 0;
-    secondValue = null;
+    a = 0;
+    b = null;
     previousOperator = 'addition';
     brightnessFlicker(clear);
 }
@@ -154,7 +195,9 @@ window.addEventListener('keydown', (e) => {
             break;
         case '-':
             operatorFunction(operators[2]);
+            break;
         case '+':
             operatorFunction(operators[3]);
+            break;
     }
 });
