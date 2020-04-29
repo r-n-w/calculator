@@ -1,20 +1,20 @@
 // make better order of operations
 
-const add = (a, b) => a + b;
-const subract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+const add = (x, y) => x + y;
+const subract = (x, y) => x - y;
+const multiply = (x, y) => x * y;
+const divide = (x, y) => x / y;
 
-const calculate = (a, b, operator) => {
+const calculate = (x, y, operator) => {
     switch (operator) {
         case 'addition':
-            return add(a, b);
+            return add(x, y);
         case 'subtraction':
-            return subract(a, b);
+            return subract(x, y);
         case 'multiplication':
-            return multiply(a, b);
+            return multiply(x, y);
         case 'division':
-            return divide(a, b);
+            return divide(x, y);
     }
 };
 const numbers = [
@@ -42,43 +42,69 @@ const backspace = document.querySelector('#backspace');
 const equal = document.querySelector('#equal');
 
 
-let op;
-let firstValue = 0;
-let secondValue;
-let currentOperator = 'addition';
-let previousOperator = 'addition';
+let a = b = c = previousOperator = prePreviousOperator = null;
 let operated = false;
 // Functions defining what happens when each button is clicked.
 function numberFunction(num) {
-    if (results.innerHTML == 0 || operated == false) {
+    if (results.innerHTML === 0 || operated === false) {
         results.innerHTML = num;
         operated = true;
     } else {
         results.innerHTML = results.innerHTML + num;
     }
-    let activeButton = numbers.find((number) => number.value == num);
+    let activeButton = numbers.find((number) => number.value === num);
     brightnessFlicker(activeButton.id);
 }
 function operatorFunction(operator) {
-    secondValue = parseFloat(results.innerHTML);
-    console.log(firstValue);
-    console.log(secondValue);
-    console.log(previousOperator);
-    results.innerHTML = calculate(firstValue,secondValue,previousOperator);
-    previousOperator = currentOperator;
-    currentOperator = operator.value;
-    firstValue = parseFloat(results.innerHTML);
-    operated = false;
+    // 3/4 times:
+    if (previousOperator === null) {
+        a = b = parseFloat(results.innerHTML);
+        previousOperator = operator.value;
+    } else if (
+        (operator.value === 'addition' || operator.value === 'subtraction') &&
+        (previousOperator === 'addition' || previousOperator === 'subtraction')
+    ) {
+        c = parseFloat(results.innerHTML);
+        a = b = results.innerHTML = calculate(b,c,previousOperator);
+        prePreviousOperator = null;
+        previousOperator = operator.value;
+    } else if (
+        (operator.value === 'multiplication' || operator.value === 'division') &&
+        (previousOperator === 'addition' || previousOperator === 'subtraction')
+    ) {
+        b = parseFloat(results.innerHTML);
+        c = null
+        prePreviousOperator = previousOperator;
+        previousOperator = operator.value;
+    } else if (
+        (operator.value === 'multiplication' || operator.value === 'division') &&
+        (previousOperator === 'multiplication' || previousOperator === 'division')
+    ) {
+        c = parseFloat(results.innerHTML);
+        b = results.innerHTML = calculate(b,c,previousOperator);
+        previousOperator = operator.value;
+    } else if (
+        (operator.value === 'addition' || operator.value === 'subtraction') &&
+        (previousOperator === 'multiplication' || previousOperator === 'division') 
+    ) {
+        c = parseInt(results.innerHTML);
+        a = b = results.innerHTML = calculate(a,calculate(b,c,previousOperator),prePreviousOperator);
+        previousOperator = operator.value;
+        prePreviousOperator = null;
+    }
     brightnessFlicker(operator.id);
+    operated = false;
 }
 function equalFunction() {
-    secondValue = parseFloat(results.innerHTML);
-    console.log(firstValue);
-    console.log(secondValue);
-    console.log(currentOperator);
-    results.innerHTML = calculate(firstValue, secondValue, currentOperator);
-    firstValue = 0;
-    previousOperator = 'addition'
+    c = parseFloat(results.innerHTML);
+    if (!previousOperator) {return};
+    if (prePreviousOperator) {
+        results.innerHTML = calculate(a,calculate(b,c,previousOperator),prePreviousOperator);
+    } else {
+        results.innerHTML = calculate(b, c, previousOperator);
+    }
+    a = b = c = previousOperator = prePreviousOperator = null;
+    operated = false;
     brightnessFlicker(equal);
 }
 function backspaceFunction() {
@@ -93,10 +119,9 @@ function backspaceFunction() {
     brightnessFlicker(backspace);
 }
 function clearFunction() {
+    a = b = c = previousOperator = prePreviousOperator = null;
     results.innerHTML = 0;
-    firstValue = 0;
-    secondValue = null;
-    previousOperator = 'addition';
+    operated = false;
     brightnessFlicker(clear);
 }
 
@@ -130,7 +155,7 @@ clear.addEventListener('click', clearFunction);
 
 
 window.addEventListener('keydown', (e) => {
-    if (!isNaN(e.key) || e.key == '.') {
+    if (!isNaN(e.key) || e.key === '.') {
         numberFunction(e.key);
     }
     switch (e.key) {
@@ -154,7 +179,9 @@ window.addEventListener('keydown', (e) => {
             break;
         case '-':
             operatorFunction(operators[2]);
+            break;
         case '+':
             operatorFunction(operators[3]);
+            break;
     }
 });
