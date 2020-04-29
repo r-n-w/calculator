@@ -1,5 +1,3 @@
-// make better order of operations
-
 const add = (x, y) => x + y;
 const subract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
@@ -40,10 +38,9 @@ const operators = [
 const clear = document.querySelector('#clear');
 const backspace = document.querySelector('#backspace');
 const equal = document.querySelector('#equal');
-
-
 let a = b = c = previousOperator = prePreviousOperator = null;
-let operated = false;
+let operated = false; // when false, the next number pressed resets the display
+
 // Functions defining what happens when each button is clicked.
 function numberFunction(num) {
     if (results.innerHTML === 0 || operated === false) {
@@ -56,7 +53,6 @@ function numberFunction(num) {
     brightnessFlicker(activeButton.id);
 }
 function operatorFunction(operator) {
-    // 3/4 times:
     if (previousOperator === null) {
         a = b = parseFloat(results.innerHTML);
         previousOperator = operator.value;
@@ -124,7 +120,6 @@ function clearFunction() {
     operated = false;
     brightnessFlicker(clear);
 }
-
 function brightnessFlicker(button) {
     setTimeout(addHighlight.bind(this, button), 0);
     setTimeout(removeHighlight.bind(this, button), 200);
@@ -152,7 +147,6 @@ operators.forEach((operator) => {
 equal.addEventListener('click', equalFunction);
 backspace.addEventListener('click', backspaceFunction)
 clear.addEventListener('click', clearFunction);
-
 
 window.addEventListener('keydown', (e) => {
     if (!isNaN(e.key) || e.key === '.') {

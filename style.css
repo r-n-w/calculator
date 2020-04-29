@@ -74,7 +74,7 @@ a:hover {
     color: whitesmoke;
 }
 .keys {
-    transition: filter .1s ease;
+    transition: filter 0.1s ease;
     display: block;
     margin: 0.15rem;
     width: 3rem;
@@ -84,18 +84,17 @@ a:hover {
     box-shadow: 0.1rem 0.1rem 0.1rem 0rem #000000,
         inset 0.1rem 0.1rem 0.1rem 0rem #ffffff38;
 }
-
 .keys:hover {
     cursor: pointer;
 }
-.highlight{
+.highlight {
     filter: brightness(50%);
 }
 .display:hover {
     cursor: default;
 }
 .svg {
-    margin: .9rem auto;
+    margin: 0.9rem auto;
     display: block;
     height: 1.5rem;
     width: 1.5rem;
@@ -136,7 +135,7 @@ a:hover {
     line-height: 2.7rem;
 }
 .display {
-    margin: .5rem;
+    margin: 0.5rem;
     background-color: #bbf7ff;
     text-align: right;
     display: block;
@@ -158,7 +157,7 @@ a:hover {
 }
 
 .footer {
-    font-size: .8rem;
+    font-size: 0.8rem;
     display: flex;
     line-height: 2.5rem;
     left: 0;
