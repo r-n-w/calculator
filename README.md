@@ -1,3 +1,4 @@
+  <p>
     This calculator project is based on the prompt from
     <a
         href="https://www.theodinproject.com/courses/web-development-101/lessons/calculator"
