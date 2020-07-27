@@ -4,96 +4,98 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Calculate Me</title>
-        <link
+        <!-- <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        />
+        /> -->
         <link rel="stylesheet" href="style.css" />
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     </head>
     <body>
-        <div class="container" style="max-width: 50rem;">
-            <div class="row top-space"></div>
-            <div class="row">
-                <div class="col mt-5 paragraph">
-                    <h1>Calculator</h1>
-                    <p>
-                        This calculator project is based on the prompt from
-                        <a
-                            href="https://www.theodinproject.com/courses/web-development-101/lessons/calculator"
-                            >The Odin Project Web Development 101</a
-                        >
-                        course. It is a basic calculator that can be operated by
-                        clicking the buttons, or by typing on your keyboard. It
-                        understands relevant order of operations, allows you to
-                        clear the memory entirely (AC) or simply backspace to
-                        delete a mistyped number.
-                    </p>
-                    <p>This project was a good opportunity to expore:</p>
-                    <ul>
-                        <li>Array methods</li>
-                        <li>Bootstrap layouts</li>
-                        <li>Objects</li>
-                        <li>Event Listeners</li>
-                        <li>Function binding</li>
-                    </ul>
+        <div class="container">
+            <div class="paragraph">
+                <h1>Calculator</h1>
+                <p>
+                    This calculator project is based on the prompt from
+                    <a
+                        href="https://www.theodinproject.com/courses/web-development-101/lessons/calculator"
+                        >The Odin Project Web Development 101</a
+                    >
+                    course. It is a basic calculator that can be operated by
+                    clicking the buttons, or by typing on your keyboard. It
+                    understands relevant order of operations, allows you to
+                    clear the memory entirely (AC) or simply backspace to delete
+                    a mistyped number.
+                </p>
+                <p>This project was a good opportunity to expore:</p>
+                <ul>
+                    <li>Array methods</li>
+                    <li>Bootstrap layouts</li>
+                    <li>Objects</li>
+                    <li>Event Listeners</li>
+                    <li>Function binding</li>
+                </ul>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="display">
+                        <span id="results">0</span>
+                    </div>
                 </div>
-                <div
-                    class="col-sm-auto mt-5 order-first order-sm-last"
-                    style="min-width: 14rem;"
-                >
-                    <div class="row">
-                        <div class="display">
-                            <span id="results">0</span>
-                        </div>
+                <div class="row">
+                    <div class="keys light" id="clear">AC</div>
+                    <div class="keys light" id="backspace">
+                        <img src="svg/backspace.svg" class="svg light" />
                     </div>
-                    <div class="row">
-                        <div class="keys light" id="clear">AC</div>
-                        <div class="keys light" id="backspace">
-                            <img src="svg/backspace.svg" class="svg light" />
-                        </div>
-                        <div class="keys yellow" id="divide">
-                            <span>÷</span>
-                        </div>
+                    <div class="keys yellow" id="divide">
+                        <span>÷</span>
                     </div>
-                    <div class="row">
-                        <div class="keys dark left" id="seven">7</div>
-                        <div class="keys dark" id="eight">8</div>
-                        <div class="keys dark right" id="nine">9</div>
-                        <div class="keys yellow" id="multiply">
-                            <span>x</span>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="keys dark left" id="seven">7</div>
+                    <div class="keys dark" id="eight">8</div>
+                    <div class="keys dark right" id="nine">9</div>
+                    <div class="keys yellow" id="multiply">
+                        <span>x</span>
                     </div>
-                    <div class="row">
-                        <div class="keys dark left" id="four">4</div>
-                        <div class="keys dark" id="five">5</div>
-                        <div class="keys dark right" id="six">6</div>
-                        <div class="keys yellow" id="subtract">
-                            <span>-</span>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="keys dark left" id="four">4</div>
+                    <div class="keys dark" id="five">5</div>
+                    <div class="keys dark right" id="six">6</div>
+                    <div class="keys yellow" id="subtract">
+                        <span>-</span>
                     </div>
-                    <div class="row">
-                        <div class="keys dark left" id="one">1</div>
-                        <div class="keys dark" id="two">2</div>
-                        <div class="keys dark right" id="three">3</div>
-                        <div class="keys yellow" id="add">
-                            <span>+</span>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="keys dark left" id="one">1</div>
+                    <div class="keys dark" id="two">2</div>
+                    <div class="keys dark right" id="three">3</div>
+                    <div class="keys yellow" id="add">
+                        <span>+</span>
                     </div>
-                    <div class="row">
-                        <div class="keys dark left" id="zero">0</div>
-                        <div class="keys dark right" id="decimal">.</div>
-                        <div class="keys red" id="equal">
-                            <span>=</span>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="keys dark left" id="zero">0</div>
+                    <div class="keys dark right" id="decimal">.</div>
+                    <div class="keys red" id="equal">
+                        <span>=</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer">
             <div class="footer-l">
-                <div class="l"><a href="http://theodinproject.com" class="href">The Odin Project</a></div>
-                <div class="l"><a href="https://github.com/ryannathanwilson" class="href">My Github</a></div>
+                <div class="l">
+                    <a href="http://theodinproject.com" class="href"
+                        >The Odin Project</a
+                    >
+                </div>
+                <div class="l">
+                    <a href="https://github.com/ryannathanwilson" class="href"
+                        >My Github</a
+                    >
+                </div>
             </div>
             <div class="footer-r">
                 <div class="r">Created by Ryan N Wilson</div>
